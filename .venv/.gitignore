@@ -1,0 +1,38 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+*# Python build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Media files (Output)
+*.wav
+*.mp4
