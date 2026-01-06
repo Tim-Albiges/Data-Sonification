@@ -1,3 +1,8 @@
+"""
+Sonify Synth Package.
+
+A numpy-based audio synthesis engine designed for data sonification tasks.
+"""
 from .engine import AudioEngine
 from .sonification import DataSonifier
 from .instruments import PRESETS

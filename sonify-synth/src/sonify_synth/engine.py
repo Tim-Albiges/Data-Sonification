@@ -1,13 +1,42 @@
+"""
+Core Audio Synthesis Engine.
+
+This module contains the AudioEngine class, responsible for:
+1. Generating raw waveforms using additive synthesis.
+2. Applying Frequency Modulation (Vibrato).
+3. Applying Amplitude Envelopes (ADSR).
+4. Mixing multiple notes into a single polyphonic buffer.
+"""
 import numpy as np
 from typing import Dict, List, Tuple, Optional
 from .utils import midi_to_freq
 
 class AudioEngine:
+    """
+    A synthesizer engine for generating polyphonic, organic audio textures.
+    """
     def __init__(self, sample_rate: int = 44100):
+        """
+        Initialize the audio engine.
+
+        Args:
+            sample_rate (int): Samples per second (default 44100 CD Quality).
+        """
         self.sample_rate = sample_rate
 
     def _generate_wave(self, freq: float, duration: float, params: Dict) -> np.ndarray:
-        """Generates a raw wave with harmonics and vibrato."""
+        """
+        Generate a raw waveform with harmonics and vibrato.
+
+        Args:
+            freq (float): Fundamental frequency in Hz.
+            duration (float): Duration in seconds.
+            params (Dict): Instrument parameter dictionary (harmonics, etc.).
+
+        Returns:
+            np.ndarray: The raw generated waveform.
+        """
+        
         t = np.linspace(0, duration, int(self.sample_rate * duration), endpoint=False)
         
         # Vibrato: Frequency Modulation
@@ -34,7 +63,16 @@ class AudioEngine:
         return wave
 
     def _apply_adsr(self, wave: np.ndarray, adsr: Dict) -> np.ndarray:
-        """Applies Attack-Decay-Sustain-Release envelope."""
+        """
+        Apply an Attack-Decay-Sustain-Release (ADSR) amplitude envelope.
+
+        Args:
+            wave (np.ndarray): The raw audio signal.
+            adsr (Dict): Dictionary containing 'attack', 'decay', etc.
+
+        Returns:
+            np.ndarray: The envelope-shaped audio signal.
+        """
         total_len = len(wave)
         a_len = int(adsr['attack'] * self.sample_rate)
         d_len = int(adsr['decay'] * self.sample_rate)
@@ -71,7 +109,18 @@ class AudioEngine:
         return wave * envelope
 
     def _apply_lpf(self, audio: np.ndarray, cutoff: float) -> np.ndarray:
-        """Applies a simple IIR Low Pass Filter."""
+        """
+        Apply a simple Infinite Impulse Response (IIR) Low Pass Filter.
+
+        This simulates a basic RC circuit filter to remove high frequencies.
+
+        Args:
+            audio (np.ndarray): Input audio.
+            cutoff (float): Cutoff frequency in Hz.
+
+        Returns:
+            np.ndarray: Filtered audio.
+        """
         # Physics: RC filter simulation
         rc = 1.0 / (2 * np.pi * cutoff + 1e-10)
         dt = 1.0 / self.sample_rate
@@ -86,8 +135,15 @@ class AudioEngine:
 
     def render(self, note_sequence: List[Tuple], instrument: Dict, total_duration: float) -> np.ndarray:
         """
-        Renders a full polyphonic sequence.
-        note_sequence: List of tuples (freq, start_time, duration, [optional_cutoff])
+        Render a full polyphonic audio sequence.
+
+        Args:
+            note_sequence (List[Tuple]): List of (freq, start_time, duration, [cutoff]).
+            instrument (Dict): Instrument definition dictionary.
+            total_duration (float): Total length of the output buffer in seconds.
+
+        Returns:
+            np.ndarray: The final mixed audio buffer.
         """
         master_len = int(self.sample_rate * total_duration)
         master_buffer = np.zeros(master_len)

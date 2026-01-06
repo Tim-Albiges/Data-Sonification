@@ -1,3 +1,12 @@
+"""
+Instrument definitions and timbre presets.
+
+Each instrument is defined by a dictionary containing:
+    - harmonics: List of weights for additive synthesis (timbre).
+    - v_rate: Vibrato rate in Hz.
+    - v_width: Vibrato depth (pitch modulation intensity).
+    - adsr: Attack, Decay, Sustain, Release envelope parameters.
+"""
 # Dictionary containing harmonic weights (timbre) and ADSR envelopes.
 
 PRESETS = {
