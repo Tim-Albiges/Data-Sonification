@@ -33,6 +33,11 @@ env/
 .vscode/
 .idea/
 
+# Environment Variables
+.env
+.env.local
+.env.shared
+
 # Media files (Output)
 *.wav
 *.mp4
