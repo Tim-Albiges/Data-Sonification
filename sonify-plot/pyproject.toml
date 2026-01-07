@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sonify-plot"
+version = "0.1.0"
+description = "A wrapper to sonify Matplotlib plots and Pandas DataFrames"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.20.0",
+    "pandas>=1.3.0",
+    "matplotlib>=3.4.0",
+    "sonify-synth @ file:../sonify-synth",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["sonify_plot*"]
+namespaces = false
