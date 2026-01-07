@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import pytest
-from sonify_plot import sonify
-from sonify_plot.extract import get_xyz_data
+from src.sonify_plot import sonify
+from src.sonify_plot.extract import get_xyz_data
 
 @pytest.fixture
 def sample_df():
