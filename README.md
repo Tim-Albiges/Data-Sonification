@@ -3,6 +3,7 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tim-Albiges/Data-Sonification/blob/main/Data_Sonification_Library.ipynb)
 
 A comprehensive Python ecosystem for transforming data into sound. This suite allows researchers, artists, and developers to "listen" to their datasets using high-quality wavetable synthesis and 3D spatial audio.
 
