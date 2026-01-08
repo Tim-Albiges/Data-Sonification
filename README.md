@@ -35,7 +35,7 @@ This project is designed to be installed from source.
 **For Google Colab / Jupyter:**
 Run this in a cell to download and install the suite immediately:
 ```python
-!curl -sSL [https://raw.githubusercontent.com/Tim-Albiges/Data-Sonification/main/install.py](https://raw.githubusercontent.com/Tim-Albiges/Data-Sonification/main/install.py) | python3
+!curl -sSL https://raw.githubusercontent.com/Tim-Albiges/Data-Sonification/main/install.py | python3
 
 ```
 
@@ -43,12 +43,14 @@ Run this in a cell to download and install the suite immediately:
 If you have cloned the repository, you can use the included helper script to install dependencies in the correct order:
 
 ```bash
-# 1. Clone the repository
-git clone [https://github.com/Tim-Albiges/Data-Sonification.git](https://github.com/Tim-Albiges/Data-Sonification.git)
-cd Data-Sonification
+# 1. Clone the repository (Clean URL, no brackets)
+!git clone https://github.com/Tim-Albiges/Data-Sonification.git
 
-# 2. Run the universal installer
-python install.py
+# 2. Enter the folder (Use %cd, not !cd)
+%cd Data-Sonification
+
+# 3. Run the installer
+!python install.py
 
 ```
 
