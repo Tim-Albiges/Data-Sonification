@@ -1,4 +1,8 @@
+
 # Data Sonification Suite
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 
 A comprehensive Python ecosystem for transforming data into sound. This suite allows researchers, artists, and developers to "listen" to their datasets using high-quality wavetable synthesis and 3D spatial audio.
 
@@ -20,39 +24,47 @@ The suite is modular and divided into two distinct packages:
 
 ## 🚀 Installation Guide
 
-This project is designed to be installed from source.
+This project is designed to be installed from source. 
 
 ### Prerequisites
 * Python 3.8 or higher
 * Git
 
-### Step 1: Clone the Repository
-Open your terminal and clone the project:
+### Quick Start (One-Line Install)
+
+**For Google Colab / Jupyter:**
+Run this in a cell to download and install the suite immediately:
+```python
+!curl -sSL [https://raw.githubusercontent.com/Tim-Albiges/Data-Sonification/main/install.py](https://raw.githubusercontent.com/Tim-Albiges/Data-Sonification/main/install.py) | python3
+
+```
+
+**For Local Terminal (Linux/macOS/Windows):**
+If you have cloned the repository, you can use the included helper script to install dependencies in the correct order:
+
 ```bash
+# 1. Clone the repository
 git clone [https://github.com/Tim-Albiges/Data-Sonification.git](https://github.com/Tim-Albiges/Data-Sonification.git)
-cd Data-SonificationData Auditorisation for Data Sonificatian that converts data to audio
+cd Data-Sonification
 
-### Step2: Install the Engine (sonify-synth)
-You must install the synthesiser first, as the plot depends on it.
+# 2. Run the universal installer
+python install.py
 
-cd sonify-synth
-pip install -e .
-cd ..
+```
 
-### Step 3: Install the Wrapper (sonify-plot)
-
-Now install the data and plot conversion library.
-
-cd sonify-plot
-pip install -e .
-cd ..
+---
 
 ## 🎧 Usage Guide
 
-1. Using sonify-plot (Recommended for Beginners)The easiest way to get started. Just pass your data, and it returns audio.Example A: Sonify a Pandas DataFrameMaps Time column to the timeline and Value column to Pitch.
+### 1. Using `sonify-plot` (Recommended for Beginners)
 
-Python
+The easiest way to get started. Just pass your data, and it returns audio.
 
+#### Example A: Sonify a Pandas DataFrame
+
+Maps the `time` column to the timeline and the `sales` column to Pitch.
+
+```python
 import pandas as pd
 from sonify_plot import sonify
 from sonify_synth.utils import save_wav
@@ -76,18 +88,19 @@ audio = sonify(
 # 3. Save to disk
 save_wav("sales_data.wav", 44100, audio)
 
-### Example B: 3D Spatial Audio (The "Sitting in Data" Effect)
+```
 
-If you have 3D data (X, Y, Z), the library maps:
+#### Example B: 3D Spatial Audio (The "Sitting in Data" Effect)
 
-X: Time & Left/Right Panning
-Y: Pitch & Front/Back Depth
-Z: Timbre (Brightness) & Vertical Height
+If you have 3D data (X, Y, Z), the library automatically maps:
+
+* **X:** Time & Left/Right Panning
+* **Y:** Pitch & Front/Back Depth
+* **Z:** Timbre (Brightness) & Vertical Height
 
 You can specify where the "listener" is sitting relative to the data.
 
-Python
-
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 from sonify_plot import sonify
@@ -115,10 +128,13 @@ audio = sonify(
 
 save_wav("spiral_spatial.wav", 44100, audio)
 
-2. Using sonify-synth (For Advanced Users)Use the engine directly if you want to compose music or control specific note frequencies.
+```
 
-Python
+### 2. Using `sonify-synth` (For Advanced Users)
 
+Use the engine directly if you want to compose music or control specific note frequencies.
+
+```python
 from sonify_synth import AudioEngine, PRESETS
 from sonify_synth.utils import save_wav
 
@@ -143,22 +159,36 @@ audio = engine.render(
 
 save_wav("manual_chord.wav", 44100, audio)
 
-📂 Included Demos
+```
+
+---
+
+## 📂 Included Demos
 
 The project comes with built-in scripts to generate example audio files.
-Script LocationDescriptionOutput Files
-sonify-plot/demo_spatial.py
-Generates a 3D audio spiral that spins around the listener.spatial_origin.wav (Spinning)spatial_distant.wav (Quiet/Far)
-sonify-plot/demo_sonify.pyConverts basic 2D DataFrames and Plots into Piano/Violin audio.output_dataframe.wavoutput_matplotlib.wav
 
-Run them via terminal:
+| Script Location | Description | Output Files |
+| --- | --- | --- |
+| `sonify-plot/demo_spatial.py` | Generates a 3D audio spiral that spins around the listener. | `spatial_origin.wav` (Spinning)<br>
 
+<br>`spatial_distant.wav` (Quiet/Far) |
+| `sonify-plot/demo_sonify.py` | Converts basic 2D DataFrames and Plots into Piano/Violin audio. | `output_dataframe.wav`<br>
+
+<br>`output_matplotlib.wav` |
+
+**To run a demo via terminal:**
+
+```bash
 cd sonify-plot
 python demo_spatial.py
 
-🛠 Project Structure
+```
 
-Plaintext
+---
+
+## 🛠 Project Structure
+
+```text
 DATA SONIFICATION/
 ├── sonify-synth/       # Core Audio Engine
 │   ├── src/
@@ -173,12 +203,30 @@ DATA SONIFICATION/
     │       └── extract.py      # Matplotlib/Pandas parsers
     └── tests/                  # Pytest suite
 
-🤝 Contributing
-1) Fork the repository.
-2) Create a feature branch (git checkout -b 
-3) feature/NewInstrument).
-4) Commit your changes.Run tests (pytest).
-5) Push to the branch and open a Pull Request.
+```
 
-📜 License
+---
+
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create a feature branch:
+```bash
+git checkout -b feature/NewInstrument
+
+```
+
+
+3. Commit your changes.
+4. Run tests:
+```bash
+pytest
+
+```
+
+
+5. Push to the branch and open a Pull Request.
+
+## 📜 License
+
 This project is licensed under the MIT License.
